@@ -1,0 +1,76 @@
+<launch>
+    <!-- import the map -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find track_navigation)/map/map.yaml" output="screen" />
+
+    <!-- Configuration -->
+    <arg name="world_name"  default="simple" />
+
+    <!-- Create the world -->
+    <include file="$(find single_2d_SLAM)/launch/include/create_world.launch">
+        <arg name="world_name"  value="$(arg world_name)"/>
+    </include>
+
+    <!-- Put the robot1 -->
+    <include file="$(find single_2d_SLAM)/launch/include/place_robot.launch">
+        <arg name="robot_name"  value="jibot1"/>
+        <arg name="if_multi_robot"   value="1"/>
+        <arg name="robot_x_pos" value="0.0"/>
+        <arg name="robot_y_pos" value="0.0"/>
+        <arg name="robot_z_pos" value="0.0"/>
+        <arg name="robot_yaw"   value="0.0"/>
+    </include>
+    <!-- Put the robot2 -->
+    <include file="$(find single_2d_SLAM)/launch/include/place_robot.launch">
+        <arg name="robot_name"  value="jibot2"/>
+        <arg name="if_multi_robot"   value="1"/>
+        <arg name="robot_x_pos" value="10.0"/>
+        <arg name="robot_y_pos" value="0.0"/>
+        <arg name="robot_z_pos" value="0.0"/>
+        <arg name="robot_yaw"   value="0.0"/>
+    </include>
+
+    <!-- amcl localization-->
+    <include file="$(find track_navigation)/launch/include/amcl.launch" >
+        <arg name="ns" value="jibot1" />
+        <arg name="initial_pose_x" value="0.0"/>
+        <arg name="initial_pose_y" value="0.0"/>
+        <arg name="initial_pose_a" value="0.0"/>
+    </include>
+    <include file="$(find track_navigation)/launch/include/amcl.launch" >
+        <arg name="ns" value="jibot2" />
+        <arg name="initial_pose_x" value="10.0"/>
+        <arg name="initial_pose_y" value="0.0"/>
+        <arg name="initial_pose_a" value="0.0"/>
+    </include>
+
+    <!-- move_base navigation-->
+    <include file="$(find track_navigation)/launch/include/move_base.launch">
+        <arg name="ns" value="jibot1" />
+        <arg name="move_forward_only" value="false"/>
+    </include> 
+    <include file="$(find track_navigation)/launch/include/move_base.launch">
+        <arg name="ns" value="jibot2" />
+        <arg name="move_forward_only" value="false"/>
+    </include> 
+
+    <!-- show global path -->
+    <node name="show_paths" pkg="track_navigation" type="show_paths.py" output="screen" respawn="true">
+        <param name="path_dir" value="$(find track_navigation)/paths"/>
+    </node>
+
+    <!-- follow the path -->
+    <node name="publish_path_jibot1" pkg="track_navigation" type="publish_path.py" output="screen" respawn="true">
+        <param name="robot_name" value="jibot1"/>
+        <param name="path_file" value="$(find track_navigation)/paths/jibot1.txt"/>
+    </node>
+
+    <node name="publish_path_jibot2" pkg="track_navigation" type="publish_path.py" output="screen" respawn="true">
+        <param name="robot_name" value="jibot2"/>
+        <param name="path_file" value="$(find track_navigation)/paths/jibot2.txt"/>
+    </node>   
+
+    <!-- rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" required="true"
+        args="-d $(find track_navigation)/rviz/show.rviz"/>
+
+</launch>

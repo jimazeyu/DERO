@@ -1,0 +1,34 @@
+<!-- Mapping with manual publishing points -->
+<launch>
+    <arg name="slam_method" default="gmapping" doc="gmapping,cartographer"/>
+
+    <!-- Create the world -->
+    <include file="$(find single_2d_SLAM)/launch/include/create_all.launch">
+        <arg name="world_name"  value="simple" />
+        <arg name="robot_name"  value="jibot"/>
+        <arg name="if_multi_robot"   value="0"/>
+        <arg name="robot_x_pos" value="0.0"/>
+        <arg name="robot_y_pos" value="0.0"/>
+        <arg name="robot_z_pos" value="0.0"/>
+        <arg name="robot_yaw"   value="0.0"/>
+    </include>
+
+    <!-- SLAM -->
+    <include file="$(find single_2d_SLAM )/launch/include/mapping.launch">
+        <arg name="slam_method"  value="$(arg slam_method)"/>
+        <arg name="scan_topic"  value="scan" />
+        <arg name="base_frame"  value="base_footprint"/>
+        <arg name="odom_frame"  value="odom"/>
+    </include>    
+
+    <!-- move base -->
+    <include file="$(find single_2d_SLAM)/launch/include/move_base.launch">
+        <arg name="cmd_vel_topic" value="cmd_vel" />
+        <arg name="odom_topic" value="odom" />
+        <arg name="move_forward_only" value="false"/>
+    </include>        
+
+    <!-- rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" required="true" />
+
+</launch>

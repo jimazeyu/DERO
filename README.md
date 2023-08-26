@@ -36,7 +36,7 @@ roslaunch single_2d_SLAM autonomous_mapping roslam_method=cartographer
 
 fig gmapping算法建图
 
-![gmapping.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c7e02528-b1b0-4e62-a15c-b67023230146/gmapping.png)
+![gmapping.png](image/gmapping.png)
 
 ## SMMR
 

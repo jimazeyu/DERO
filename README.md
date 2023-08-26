@@ -1,5 +1,3 @@
-# 说明文档
-
 contibuter：jimazeyu cyj
 
 # Introduction
@@ -36,9 +34,25 @@ roslaunch single_2d_SLAM autonomous_mapping
 roslaunch single_2d_SLAM autonomous_mapping roslam_method=cartographer
 ```
 
+fig gmapping算法建图
+
+![gmapping.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c7e02528-b1b0-4e62-a15c-b67023230146/gmapping.png)
+
 ## SMMR
 
  这个功能包可以实现多机协同主动探索SLAM，通过子图合并以及MMPF多目标人工势场法完成建图，具体请参考项目：SMMR-explore
+
+fig1.三机器人建图前
+
+![三机器人建图前.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f733ced0-79e6-41b4-81d3-e28c9f690eac/%E4%B8%89%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BB%BA%E5%9B%BE%E5%89%8D.png)
+
+fig2.三机器人建图，使用rrt算法（对照组）
+
+![rrt算法建图过程.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/74df5f02-dc3b-4a88-9cfd-f8bce41e4ba2/rrt%E7%AE%97%E6%B3%95%E5%BB%BA%E5%9B%BE%E8%BF%87%E7%A8%8B.png)
+
+fig3.三机器人建图，使用MMPF算法
+
+![mmpf建图.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d58d31ca-9a7f-492c-a3ae-448192a9184d/mmpf%E5%BB%BA%E5%9B%BE.png)
 
 # 3d_mapping
 
@@ -66,6 +80,16 @@ to do：实现更优的任务划分与动态局部路径规划
 
 目前小bug：由于程序中调用了很多适配windows的opencv库，暂时无法在Linux下读图和识别。
 
+### 运行方法：
+
+```bash
+roslaunch track_navigation multi_point_navigation.launch
+```
+
+track_navigation
+
+![track_navigation.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e474f68f-e355-4075-817f-9696ac2b39e9/track_navigation.png)
+
 # pure_localization
 
 基于确定地图的localization
@@ -73,3 +97,5 @@ to do：实现更优的任务划分与动态局部路径规划
 # virtual_scenarios
 
 待完善：各种类型的world，供测试使用
+
+https://b23.tv/EpNgbcV

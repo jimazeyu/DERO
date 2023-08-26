@@ -44,15 +44,15 @@ fig gmapping算法建图
 
 fig1.三机器人建图前
 
-![三机器人建图前.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f733ced0-79e6-41b4-81d3-e28c9f690eac/%E4%B8%89%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BB%BA%E5%9B%BE%E5%89%8D.png)
+![三机器人建图前.png](image/before_mapping.png)
 
 fig2.三机器人建图，使用rrt算法（对照组）
 
-![rrt算法建图过程.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/74df5f02-dc3b-4a88-9cfd-f8bce41e4ba2/rrt%E7%AE%97%E6%B3%95%E5%BB%BA%E5%9B%BE%E8%BF%87%E7%A8%8B.png)
+![rrt算法建图过程.png](image/rrt_mapping.png)
 
 fig3.三机器人建图，使用MMPF算法
 
-![mmpf建图.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d58d31ca-9a7f-492c-a3ae-448192a9184d/mmpf%E5%BB%BA%E5%9B%BE.png)
+![mmpf建图.png](image/mmpf_mapping.png)
 
 # 3d_mapping
 
@@ -88,7 +88,7 @@ roslaunch track_navigation multi_point_navigation.launch
 
 track_navigation
 
-![track_navigation.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e474f68f-e355-4075-817f-9696ac2b39e9/track_navigation.png)
+![track_navigation.png](image/track_navigation.png)
 
 # pure_localization
 

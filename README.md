@@ -97,5 +97,3 @@ track_navigation
 # virtual_scenarios
 
 待完善：各种类型的world，供测试使用
-
-https://b23.tv/EpNgbcV
